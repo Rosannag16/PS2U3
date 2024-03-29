@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Utenti</h2>
+    <input type="text" class="form-control mb-3" placeholder="Filtra per nome o cognome" [(ngModel)]="filterText">
+    <div *ngFor="let user of filteredUsers" class="user-card row mb-3">
+        <div class="col-md-3">
+            <img [src]="user.image" alt="User Image" class="img-fluid rounded-circle">
+        </div>
+        <div class="col-md-9">
+            <div class="user-details">
+                <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+                <p>{{ user.title }}</p>
+                <p>Email: {{ user.email }}</p>
+                <h4>Todo:</h4>
+                <ul class="list-unstyled">
+                    <li *ngFor="let todo of user.todos" [ngClass]="{ 'text-success': todo.completed, 'text-danger': !todo.completed }">
+                        <input type="checkbox" [(ngModel)]="todo.completed" class="mr-2" />
+                        <span class="ml-2" [ngStyle]="{ 'color': todo.completed ? 'green' : 'red' }">{{ todo.todo }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

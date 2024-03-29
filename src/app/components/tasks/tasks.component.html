@@ -1,0 +1,20 @@
+<div class="container">
+    <div *ngFor="let todo of todos" class="mb-3"
+        [ngClass]="{'bg-success text-white': todo.completed, 'bg-danger text-white': !todo.completed}">
+        <div>{{ todo.todo }}</div>
+        <div *ngIf="todo.userId !== undefined && todo.userId !== null">
+            <span *ngFor="let user of users">
+                <span *ngIf="user.id === todo.userId">
+                    <strong>Assigned to:</strong> {{ user.firstName }} {{ user.lastName }}
+                </span>
+            </span>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" [checked]="todo.completed"
+                (change)="toggleCompletion(todo)">
+            <label class="form-check-label">
+                {{ todo.completed ? 'Completed' : 'Incomplete' }}
+            </label>
+        </div>
+    </div>
+</div>
